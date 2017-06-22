@@ -15,10 +15,10 @@
             "theme": "monokai"
         },
         "disqus": {
-            "shortName": "design-pattern-learning-gitbook-teaho-net"
+            "shortName": "java-api-learning-gitbook-teaho-net"
         }, 
         "ga": {
-            "token": "UA-90704189-2"
+            "token": "UA-90704189-3"
         }
         
     }
