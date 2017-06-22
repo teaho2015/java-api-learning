@@ -191,7 +191,11 @@ try {
 
 ## references
 [1] [stackoverflow | Diffrenence between AppClassloader and SystemClassloader](https://stackoverflow.com/questions/34650568/diffrenence-between-appclassloader-and-systemclassloader)
+
 [2] [ifeve | ClassLoader ](http://ifeve.com/classloader/)
+
 [3] [csdn | java中类的加载顺序介绍(ClassLoader) ](http://blog.csdn.net/eff666/article/details/52203406)
+
 [4] [深度分析 Java 的 ClassLoader 机制（源码级别）](http://blog.jobbole.com/96145/)
+
 [5] [csdn | ClassLoader源码分析 ](http://blog.csdn.net/vking_wang/article/details/17162327)
