@@ -12,6 +12,8 @@ public class NewInstanceParent {
     }
 
     public NewInstanceParent() {
-        System.out.println(9);
+        System.out.println(10);
     }
+
+    public A a2 = new A(9);
 }
