@@ -188,7 +188,7 @@ PS.同时发现了一个网页运行代码的好工具[ideone](http://ideone.com
 
 #### 如何使实例化的字符串进入StringTable
 
-[`intern()`](#方法intern())方法，可使实例化后的调用该方法的字符串，与StringTable进行比对，
+[`intern()`](#方法intern)方法，可使实例化后的调用该方法的字符串，与StringTable进行比对，
 不存在则将该字符串引用塞进StringTable，并返回其引用。
 
 #### 如何限定StringTable的大小
@@ -202,16 +202,53 @@ java7后 默认为`60013`
 
 #### 其他
 
+对了，有几个测试可玩下，猜下输出：
+[include:7-](../../javacode/src/main/java/com/tea/lang/string/FinalStringMain.java)
 
+至于为什么，答案在如下3个链接中：
+[3.10.5. String Literals](http://docs.oracle.com/javase/specs/jls/se8/html/jls-3.html#jls-StringLiteral)
+[15.28. Constant Expressions](http://docs.oracle.com/javase/specs/jls/se8/html/jls-15.html#jls-15.28)
+[4.12.4. final Variables](http://docs.oracle.com/javase/specs/jls/se8/html/jls-4.html#jls-4.12.4)
 
-还有，这篇文章里涵盖了Java6,7,8 StringTable的性能测试结果[ [7] ](#references)。
+以下两个测试出自[[9]](#references):
+~~~
+class NewTest1{
+    public static String s1="static";
+    public static void main(String[] args) {
+        String s1=new String("he")+new String("llo");
+        s1.intern();
+        String s2="hello";
+        System.out.println(s1==s2);
+    }
+}
+~~~
 
+~~~
+class NewTest2{
+    public static void main(String[] args) {
+        String s1=new String("he")+new String("llo");
+        String s2=new String("h")+new String("ello");
+        String s3=s1.intern();
+        String s4=s2.intern();
+        System.out.println(s1==s3);
+        System.out.println(s1==s4);
+    }
+}
+~~~
+
+#### 性能
+
+这篇文章里涵盖了Java6,7,8 StringTable的性能测试结果[ [7] ](http://java-performance.info/string-intern-in-java-6-7-8/)。
 
 [](intern-》常量池->内存结构-》字符串池-》StringTable-》ldc-》type of pools-》Stack Overflow-》jls-》literal-》jvms-》weak reference-》oracle java standard Hotspot arch-》 )
 
 ## 源码学习
 
+###
+
 ### 方法intern()
+
+
 
 ## references
 [1] Bruce Eckel.Java编程思想,第四版[M].中国:机械工业出版社，2007
