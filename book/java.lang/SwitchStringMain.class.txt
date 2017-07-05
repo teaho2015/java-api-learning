@@ -1,0 +1,39 @@
+//
+// Source code recreated from a .class file by IntelliJ IDEA
+// (powered by Fernflower decompiler)
+//
+
+package com.tea.lang.string;
+
+public class SwitchStringMain {
+    public SwitchStringMain() {
+    }
+
+    public static void main(String[] args) {
+        String s = "abc";
+        byte var3 = -1;
+        switch(s.hashCode()) {
+        case 97:
+            if(s.equals("a")) {
+                var3 = 0;
+            }
+            break;
+        case 96354:
+            if(s.equals("abc")) {
+                var3 = 1;
+            }
+        }
+
+        switch(var3) {
+        case 0:
+            System.out.println("a");
+            break;
+        case 1:
+            System.out.println("abc");
+            break;
+        default:
+            System.out.println("default");
+        }
+
+    }
+}
