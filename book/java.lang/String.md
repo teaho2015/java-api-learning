@@ -199,6 +199,9 @@ java6 默认`1009`
 
 java7后 默认为`60013`
 
+#### StringTable分析参数
+
+加上`-XX:+PrintStringTableStatistics` 参数后，在Java Application运行结束前，会打印出一个本次运行的StringTable分析报告。
 
 #### 其他
 
@@ -272,6 +275,11 @@ class NewTest2{
 [10] [stackoverflow | the timing of String Literal loaded into StringTable in Java HotSpot vm][link: stackoverflow | the timing of String Literal loaded into StringTable in Java HotSpot vm]
 
 [11] [csdn | Java (JDK7)中的String常量和String.intern的实现](http://blog.csdn.net/raintungli/article/details/38595573)
+
+[12] [JVM Anatomy Park #10: String.intern()](https://shipilev.net/jvm-anatomy-park/10-string-intern/)
+
+
+
 
 
 [link: The Java Language Specification]: http://docs.oracle.com/javase/specs/jls/se8/html/index.html
