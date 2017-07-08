@@ -247,13 +247,133 @@ class NewTest2{
 
 ## 源码学习
 
-###
+没开始看前，先立个flag。。其实我觉得String类（也包括大多数类）的大部分地方都有JavaDoc讲解其用法或一些关键点，
+所以，我看的时候只会在写一些有关关键结构或核心属性、方法或一些对我来说有学习价值的点的笔记。
+
+`java.lang.String`实现了序列化接口。
+实现了CharSequence，说明存在字符序列结构。
+还有实现了Comparable接口，说明该类存在内在的排序关系(natural ordering)，关于实现了该接口的一些特点将在[Comparable接口](Comparable.md)说明。
+
+`String`就是使用字符数组(char[] value)实现的。构造器都是围绕`private final char value[];`去实现的。
+含有`byte[]`作为构造器参数的构造器，如果其参数中没指定charset，那么调用系统默认的编码格式。
+
+### 方法hashCode()
+
+注：该段在开搞Object类时将迁移到其[hashCode()]()方法上。
+
+#### hashCode的目的和实现原理
+
+在说到String的hashcode的具体实现前，先谈谈hashCode的目的和实现原理。
+
+##### hashCode方法约定
+
+以下是Object的hashCode的约定，摘自Java doc(JavaSE8):
+
+>The general contract of hashCode is:
+>* Whenever it is invoked on the same object more than once during an execution of a Java application, the hashCode method must consistently return the same integer, provided no information used in equals comparisons on the object is modified. This integer need not remain consistent from one execution of an application to another execution of the same application.
+>* If two objects are equal according to the equals(Object) method, then calling the hashCode method on each of the two objects must produce the same integer result.
+>* It is not required that if two objects are unequal according to the equals(Object) method, then calling the hashCode method on each of the two objects must produce distinct integer results. However, the programmer should be aware that producing distinct integer results for unequal objects may improve the performance of hash tables.
+
+简单来说，
+第一点，同一对象在核心域（equals方法用到的信息）没有被修改时，被多次调用`hashCode`函数，其返回的值应始终如一。
+第二点，`equals`方法返回的结果为相等，那么两者`hashCode`方法也必须相等。
+第三点，但`equals`方法不等时，两者`hashCode`却被允许可以相等。
+
+
+##### hashCode的目的
+
+在我以前的思考里，我觉得`hashCode()`应该是反映该类的核心属性、核心数据结构，从而对于外部能反映其区分特征的一个方法。
+
+当然，
+1. 现在从[hashCode方法约定](#hashCode方法约定)中可看出，其实简单说，能反映equals方法用到的信息就可以。
+2. effective java[[13]](#references)中说到，一个好的散列函数应当是：
+    > 理想情况下，散列函数应该吧集合中不相等的实例均匀地分布到所有可能的散列值上。
+
+    并且javadoc有如下提议：
+    >the programmer should be aware that producing distinct integer results for unequal objects may improve the performance of hash tables.
+
+第二点虽说并不是硬性要求，但我之所以罗列上是因为，当我们重写了equals、hashCode方法后，
+我们会有挺大几率会将其与一些HashMap等等的集合、一些方法应用到一起。且，在对该对象进行比较时，选择性的使用如[switch语法糖](#switch语法糖)的用法进行比较对性能也是好的。
+
+##### hashCode方法实现的范式
+
+Effective Java第9条[[13]](#references)给出了书写hashCode的一般方式。
+>1. 把某个非零常数值，比如说17，保存在一个叫result的int类型的变量中。
+>2. 对于对象中每一个关键域f（指equals方法中考虑的每一个域），完成以下步骤：
+   a.为该域计算int类型的散列码c：
+       i.如果该域是boolean类型，则计算(f ? 0 : 1)。
+       ii.如果该域是byte、char、short或者int类型，则计算(int)f。
+       iii.如果该域是long类型，则计算(int)(f^(f>>>32))。
+       iv.如果该域是float类型，则计算Float.floatToIntBits(f)。
+       v.如果该域是double类型，则计算Double.doubleToLongBits(f)得到一个long类型的值，然后  按照步骤2.a.iii，对该long型值计算散列值。
+       vi.如果该域是一个对象引用，并且该类的equals方法通过递归调用equals的方式来比较这个域，则同样对这个域递归调用hashCode。如果要求一个更为复杂的比较，则为这个域计算一个“规范表示（canonical representation）”，然后针对这个范式表示调用hashCode。如果这个域的值为null,则返回0（或者其他某个常数，但习惯上使用0）。
+       vii.如果该域是一个数组，则把每一个元素当做单独的域来处理。也就是说，递归地应用上述规则，对每个重要的元素计算一个散列码，然后根据步骤2.b中的做法把这些散列值组合起来。
+   b.按照下面的公式，把步骤a中计算得到的散列码c组合到result中：result=result*31+c
+>3.返回result。
+>4.写完了hashCode方法之后，问自己“是否相等的实例具有相等的散列码”。如果不是的话，找出原因，并修正错误。
+
+>之所以选择31，是因为它是个奇素数，如果乘数是偶数，并且乘法溢出的话，信息就会丢失，因为与2相乘等价于移位运算。
+使用素数的好处并不是很明显，但是习惯上都使用素数来计算散列结果。
+31有个很好的特性，就是用移位和减法来代替乘法，可以得到更好的性能：31*i==(i<<5)-i。现在的VM可以自动完成这种优化。
+
+事实上，对于选择31仍然有争议，具体参考[[14]](#references)。当然，对于选31还是选73、37等等，差别不算大。
+
+#### String hashCode
+
+String的hashcode方法的算法如下：
+~~~
+s[0]*31^(n-1) + s[1]*31^(n-2) + ... + s[n-1]
+~~~
+
+### replaceFirst、replaceAll、replace区别
+
+~~~
+String replaceFirst(String regex, String replacement)
+String replaceAll(String regex, String replacement)
+String replace(CharSequence target, CharSequence replacement)
+~~~
+
+1. replace的参数是char和CharSequence,即可以支持字符的替换,也支持字符串的替换
+2. replaceAll和replaceFirst的参数是regex,即基于规则表达式的替换,
+比如,可以通过replaceAll(“\d”, “*”)把一个字符串所有的数字字符都换成星号;
+相同点是都是全部替换,即把源字符串中的某一字符或字符串全部换成指定的字符或字符串,
+如果只想替换第一次出现的,可以使用 replaceFirst(),这个方法也是基于规则表达式的替换,但与replaceAll()不同的是,只替换第一次出现的字符串;
+另外,如果replaceAll()和replaceFirst()所用的参数据不是基于规则表达式的,则与replace()替换字符串的效果是一样的,即这两者也支持字符串的操作;
 
 ### 方法intern()
 
+intern方法的源码：
+~~~
+JVM_ENTRY(jstring, JVM_InternString(JNIEnv *env, jstring str))
+  JVMWrapper("JVM_InternString");
+  JvmtiVMObjectAllocEventCollector oam;
+  if (str == NULL) return NULL;
+  oop string = JNIHandles::resolve_non_null(str);
+  oop result = StringTable::intern(string, CHECK_NULL);
+  return (jstring) JNIHandles::make_local(env, result);
+JVM_END
 
+oop StringTable::intern(Handle string_or_null, jchar* name,
+                        int len, TRAPS) {
+  unsigned int hashValue = hash_string(name, len);
+  int index = the_table()->hash_to_index(hashValue);
+  oop string = the_table()->lookup(index, name, len, hashValue);
+
+  // Found
+  if (string != NULL) return string;
+
+  // Otherwise, add to symbol to table
+  return the_table()->basic_add(index, string_or_null, name, len,
+                                hashValue, CHECK_NULL);
+}
+~~~
+
+intern方法的用途吧，我认为作用不大。它的用途可用于debug;
+
+或者，当我们确信这个String会在运行中的系统内多次新建，那么可调用String.intern并使用其返回的String引用。
 
 ## references
+
 [1] Bruce Eckel.Java编程思想,第四版[M].中国:机械工业出版社，2007
 
 [2] [知乎 | javap生成的汇编语言怎么看？- RednaxelaFX的回答 ](https://www.zhihu.com/question/49470442/answer/182612198/)
@@ -278,9 +398,11 @@ class NewTest2{
 
 [12] [JVM Anatomy Park #10: String.intern()](https://shipilev.net/jvm-anatomy-park/10-string-intern/)
 
+[13] Joshua Blosh.Effective Java,第2版[M].中国:机械工业出版社，2009
 
+[14] [stackoverflow | Why does Java's hashCode() in String use 31 as a multiplier?](https://stackoverflow.com/questions/299304/why-does-javas-hashcode-in-string-use-31-as-a-multiplier%EF%BC%89)
 
-
+[15] [ImportNew | 使用String的intern方法节省内存](http://www.importnew.com/21836.html)
 
 [link: The Java Language Specification]: http://docs.oracle.com/javase/specs/jls/se8/html/index.html
 [link: The Java Virtual Machine Specification]: http://docs.oracle.com/javase/specs/jvms/se8/html/index.html
