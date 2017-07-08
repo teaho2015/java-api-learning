@@ -58,7 +58,7 @@ java7加入了新的语法特性，使得switch语法能够将String作为判断
 
 ### Run-Time Data Areas
 
-先简单介绍下jvm运行时虚拟内存的划分（该图取自Java Language Specification[[6]](#references)的目录）：
+先简单介绍下jvm运行时虚拟内存的划分（该图取自Java Virtual Machine Specification[[6]](#references)的目录）：
 ![Run-Time Data Areas.png](Run-Time Data Areas.png)
 
 我简单介绍下，具体可参考jvms第2章第5节[2.5. Run-Time Data Areas](http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-2.html#jvms-2.5)
