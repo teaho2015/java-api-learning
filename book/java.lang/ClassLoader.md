@@ -38,12 +38,16 @@ AppClassLoader的parent是ExtClassLoader，但ExtClassLoader的parent是null，�
 * AppClassLoader负责加载应用类
 * 一些用户自定义的ClassLoader
 
+当然，这三者的分工可看考Java官方的文档(tools reference)，里面有对于它们分工的细节、如何自定义有更详尽的描述：
+
+[Java Platform, Standard Edition Tools Reference | How the Java Runtime Finds Classes](http://docs.oracle.com/javase/8/docs/technotes/tools/windows/findingclasses.html#A1012444)
+
 ClassLoader的核心抽象类：
 ~~~
 public abstract class ClassLoader
 ~~~
 
-如下会浅析ClassLoader的重点部分
+**如下会浅析ClassLoader的重点部分**
 
 ## 重点
 
@@ -199,3 +203,5 @@ try {
 [4] [深度分析 Java 的 ClassLoader 机制（源码级别）](http://blog.jobbole.com/96145/)
 
 [5] [csdn | ClassLoader源码分析 ](http://blog.csdn.net/vking_wang/article/details/17162327)
+
+[6] [Java Platform, Standard Edition Tools Reference](http://docs.oracle.com/javase/8/docs/technotes/tools/windows/toc.html)
