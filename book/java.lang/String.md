@@ -181,7 +181,7 @@ oop constantPoolOopDesc::string_at_impl(constantPoolHandle this_oop, int which, 
 
 于是，我在stackoverflow上提了个问题，得出答案：[ [10]stackoverflow | the timing of String Literal loaded into StringTable in Java HotSpot vm][link: stackoverflow | the timing of String Literal loaded into StringTable in Java HotSpot vm]
 
-由如下代码块可知，HotSpot VM是Lazy resolve，且String Literal（字符串字面量）是Lazy resolve。
+由如下代码块可知，HotSpot VM是Lazy resolve，且String Literal（字符串字面量）是Lazy resolve（注，我的讨论base在Java8，java6如下亲测并不是lazy resolve）。
 [include:7-](../../javacode/src/main/java/com/tea/lang/string/LazyResolveTestMain.java)
 
 PS.同时发现了一个网页运行代码的好工具[ideone](http://ideone.com/FrIAOX)。
