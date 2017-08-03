@@ -16,6 +16,8 @@ Definitions:
     <hostid>:      <hostname>[:<port>]
 ~~~
 
+注：功能描述主要来源于，翻译[Java Platform, Standard Edition Tools Reference | jps][link: 3]。
+
 *-q*只显示`pid`，不显示`class`名称,`jar`文件名和传递给`main`方法的参数
 ~~~
 >jps -q
@@ -117,12 +119,14 @@ stack overflow在该问题下的回答[How does JPS tool get the name of the mai
 
 [2][hollischuang's blog | Java命令学习系列（一）——Jps](http://www.hollischuang.com/archives/105)
 
-[3][Java Platform, Standard Edition Tools Reference | jps](http://docs.oracle.com/javase/8/docs/technotes/tools/windows/jps.html)
+[3][Java Platform, Standard Edition Tools Reference | jps][link: 3]
 
 [4][Java Platform, Standard Edition Troubleshooting Guide | 2.15 The jps Utility](http://docs.oracle.com/javase/8/docs/technotes/guides/troubleshoot/tooldescr015.html)
 
 [5][stack overflow | How does JPS tool get the name of the main class or jar it is executing][link: 5]
 
+
+[link: 3]: http://docs.oracle.com/javase/8/docs/technotes/tools/windows/jps.html
 [link: 5]: https://stackoverflow.com/a/25088276/6874711
 
 
