@@ -6,8 +6,8 @@
 [](reserved for * 关键字)
 
 * [Java工具](book/tools/README.md)
-    * [jps]()
-
+    * [jps](book/tools/jps.md)
+    * [jstack](book/tools/jstack.md)
 
 * java.lang
     * [String](book/java.lang/String.md)
