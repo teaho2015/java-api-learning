@@ -114,7 +114,7 @@ btw，不建议使用`public Thread(ThreadGroup group, String name)`等方法，
 | TIMED_WAITING | The thread is waiting for another thread to perform an action for up to a specified waiting time. |
 | TERMINATED | The thread has exited. |
 
-注：[这里](../language/monitor.md)会解释什么是monitor。
+注：[这里](../language/monitor.md)会解释什么是*monitor*、进入区（下文出现的）和等待区。
 
 另外，请参考[《深入理解Java虚拟机》[9]](#references)12.4.3小节状态转换，里面有对于上述线程状态以及相关[线程动作](#线程动作)的解读。
 
@@ -123,7 +123,7 @@ btw，不建议使用`public Thread(ThreadGroup group, String name)`等方法，
 摘自[JavaDump analysis.pdf](JavaDump analysis.pdf)(注：google到的，如有版权问题不能挂请email我):
 * runnable：状态一般为RUNNABLE。
 * in Object.wait()：等待区等待，状态为WAITING或TIMED_WAITING。
-* waiting for monitor entry：迚入区等待，状态为BLOCKED。
+* waiting for monitor entry：进入区等待，状态为BLOCKED。
 * waiting on condition：等待区等待、被park。
 * sleeping：休眠的线程，调用了Thread.sleep()。
 
@@ -131,8 +131,8 @@ btw，不建议使用`public Thread(ThreadGroup group, String name)`等方法，
 
 摘自[JavaDump analysis.pdf](JavaDump analysis.pdf)
 * locked <对象地址> (a 类名) 使用synchronized申请对象锁成功，监视器的拥有者。
-* waiting to lock <对象地址> (a 类名) 使用synchronized申请对象锁未成功，在迚入区等待。
-* waiting on <对象地址> (a 类名) 使用synchronized申请对象锁成功后，释放锁幵在等待区等待。
+* waiting to lock <对象地址> (a 类名) 使用synchronized申请对象锁未成功，在进入区等待。
+* waiting on <对象地址> (a 类名) 使用synchronized申请对象锁成功后，释放锁并在等待区等待。
 * parking to wait for <对象地址> park是基本的线程阻塞原语，不通过监视器在对象上阻塞。
   随concurrent包会出现的新的机制，与synchronized体系不同。
 
