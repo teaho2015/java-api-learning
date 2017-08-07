@@ -1,6 +1,7 @@
 # jstack
 
 jstack是java虚拟机自带的一种堆栈跟踪（stack trace）工具。
+当程序发生死锁，死循环，一些网络或文件操作长时间hung了等等情况的时候，使用jstack命令可帮助分析。
 
 来自[官方说明][link: 1]：
 >The jstack command prints Java stack traces of Java threads for a specified Java process, core file, or remote debug server. For each Java frame, the full class name, method name, byte code index (BCI), and line number, when available, are printed.
@@ -115,6 +116,8 @@ btw，不建议使用`public Thread(ThreadGroup group, String name)`等方法，
 
 注：[这里](../language/monitor.md)会解释什么是monitor。
 
+另外，请参考[《深入理解Java虚拟机》[9]](#references)12.4.3小节状态转换，里面有对于上述线程状态以及相关[线程动作](#线程动作)的解读。
+
 ### 线程动作
 
 摘自[JavaDump analysis.pdf](JavaDump analysis.pdf)(注：google到的，如有版权问题不能挂请email我):
@@ -138,7 +141,7 @@ btw，不建议使用`public Thread(ThreadGroup group, String name)`等方法，
 
 首先，是使用`jstack`（linux下可使用`kill`）命令生成thread dump。
 
-然后，一般很难单纯从Thread Dump直接看出问题。我们需要从源代码、Thread Dump和系统相互的互为的进行分析、推导。
+然后，一般很难单纯从Thread Dump直接看出问题。我们需要从源代码、Thread Dump和系统*相互的互为的进行分析、推导*。
 
 再者，一个个地排除，缩小问题，看究竟是发生在操作系统还是JVM还是第三方的中间件、库还是自己写的代码是否锁住了同一个地址等等。
 
@@ -172,7 +175,7 @@ btw，不建议使用`public Thread(ThreadGroup group, String name)`等方法，
 
 * [Java performance[6]](#references)中2.4节有提及，如何在不同系统中监控锁竞争。
 
-* 在application中或app外，增加一些监控措施，比如app内监控线程状态并发送预警，写一些shell scripts去监控thread、定期抓取thread转储信息，或者使用一些第三方工具等等。
+* 在application中或app外，增加一些监控措施，比如app内监控线程状态(如获取Thread.getAllStackTraces())并发送预警，写一些shell scripts去监控thread、定期抓取thread转储信息，或者使用一些第三方工具等等。
 
 
 
@@ -186,13 +189,16 @@ btw，不建议使用`public Thread(ThreadGroup group, String name)`等方法，
 
 [4][Java Platform, Standard Edition Troubleshooting Guide](http://docs.oracle.com/javase/8/docs/technotes/guides/troubleshoot/toc.html)
 
-[5]Joshua Blosh.Effective Java,第2版[M].中国:机械工业出版社，2009
+[5]Joshua Blosh.Effective Java,第2版[M].中国:机械工业出版社,2009
 
 [6]Charlie Hunt,Binu John.Java性能优化权威指南[M].中国:人民邮电出版社,2014
 
 [7][How threads work: more details](http://www.javamex.com/tutorials/threads/how_threads_work.shtml)
 
 [8][csdn |  jstack(查看线程)、jmap(查看内存)和jstat(性能分析)命令](http://blog.csdn.net/rodulf/article/details/53415860)
+
+[9]周志明.深入理解Java虚拟机:JVM高级特性与最佳实践,第2版.中国:机械工业出版社,2013
+
 
 
 [link: wikipedia | 内存泄漏]:https://zh.wikipedia.org/zh-cn/%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F
