@@ -8,9 +8,64 @@
 Java8 doc中是这样介绍的。。
 >A class loader is an object that is responsible for loading classes. The class ClassLoader is an abstract class. Given the binary name of a class, a class loader should attempt to locate or generate data that constitutes a definition for the class. A typical strategy is to transform the name into a file name and then read a "class file" of that name from a file system.
 
-ClassLoader在Java语言中占据了非常重要的地位，Java中的所有类，必须被装载到jvm中才能运行，这个装载工作是由Java中的类装载器完成的。
+ClassLoader在Java语言中占据了非常重要的地位，Java中的所有类，必须被加载到jvm中才能运行，这个加载工作是由Java中的类加载器完成的。
 
 而且Java应用服务器，OSGi，以及大量的网络框架企业级框架，它们大多数都自定义了自己的ClassLoader。
+
+
+## JVM类加载机制
+
+由于，本篇讨论的是`ClassLoader`，所以，本节仅说下大致的结构，更多细节请看[深入理解Java虚拟机<sup>[9]</sup>](#references)，下图及一些描述也是取自该书。
+
+一个java文件从被加载到被卸载这个生命过程，总共要经历5个阶段，JVM将类加载过程分为：
+
+![JVM ClassLoading Strategy](JVMClassLoadingStrategy.png)
+
+注意，该顺序为“开始”顺序，但是，它们的执行过程中是会有交叉的（即，不是一个阶段结束另一个才开始）。
+
+#### 加载
+
+1. 通过一个类的全限定名来获取定义此类的二进制字节流。
+2. 将这个字节流所代表的静态存储结构转化为方法区的运行时数据结构。
+3. 在内存中生成一个代表这个类的`java.lang.Class`对象，作为方法区这个类的各种数据的访问入口。
+
+*虚拟机的设计，把 1.这个动作放到JVM外部实现，实现这个动作的代码模块称为"类加载器"(ClassLoader)。*
+这也是，我本篇学习和讨论的重点。
+
+#### 验证
+
+这一阶段的主要目的是为了确保Class文件的字节流中包含的信息是否符合当前虚拟机的要求，并且不会危害虚拟机自身的安全。
+
+需注意，如下语句，在准备阶段过后，初始值为0而不是123
+~~~
+
+public static int value = 123;
+
+~~~
+
+但是，某些情况，如果类字段的字段属性表中存在ConstantValue属性，那在准备阶段变量value就会被初始化为ConstantValue的值。例如，下面的语句准备阶段过后，值为123：
+
+~~~
+
+public static final int value = 123;
+
+~~~
+
+#### 准备
+
+准备阶段是正式为*类变量*分配内存并设置类变量*初始值*的阶段，这些变量所使用的内存都将在方法区中进行分配。
+
+#### 解析
+
+解析阶段是指虚拟机将常量池中的*符号引用*替换为*直接引用*的过程。
+
+符号引用的目标并不一定要已经加载到内存中，但直接引用的目标必定已在内存。
+
+#### 初始化
+
+初始化阶段是执行类构造器<client>方法的过程。
+<client>方法是由编译器自动手机类变量的赋值动作和静态语句块（static{}块）中的语句合并产生。
+
 
 
 ## 一般Java程序的ClassLoader的hierarchy
@@ -50,20 +105,6 @@ public abstract class ClassLoader
 **如下会浅析ClassLoader的重点部分**
 
 ## 重点
-
-### JVM类加载过程
-
-一个java文件从被加载到被卸载这个生命过程，总共要经历5个阶段，JVM将类加载过程分为：
-
-  加载->链接（验证+准备+解析）->初始化（使用前的准备）->使用->卸载
-
-### 对象的各部分新建顺序
-
-[include:6-](../../javacode/src/main/java/com/tea/lang/class0/A.java)
-
-[include:6-](../../javacode/src/main/java/com/tea/lang/class0/NewInstanceParent.java)
-
-[include:6-](../../javacode/src/main/java/com/tea/lang/class0/NewInstanceMain.java)
 
 ### loadClass方法的实现方式
 
@@ -191,7 +232,7 @@ try {
 | 类找不到 | 加载了不正确的类 | 多于一个类被加载  |
 | :---: | :---: | :---: |
 | ClassNotFoundException NoClassDefFoundError| IncompatibleClassChangeError NoSuchMethodError NoSuchFieldError IllegalAccessError | ClassCastException LinkageError |
-| IDE class lookup (Ctrl+Shift+T in Eclipse)find . -name “*.jar” -exec jar -tf {} \;  grep DateUtils 使用middleware-detector;命令行打包jar，解包war去找问题 | 通过在启动参数中加 -verbose:class，观察加载的类来自哪个jar包使用middelware-detector | 通过`-verbose:class`观察 |
+| IDE class lookup (Ctrl+Shift+T in Eclipse);find . -name “*.jar” -exec jar -tf {} \; 使用middleware-detector; 命令行打包jar; 解包war去找问题 | 通过在启动参数中加 -verbose:class，观察加载的类来自哪个jar包使用middelware-detector | 通过`-verbose:class`观察 |
 
 ## references
 [1] [stackoverflow | Diffrenence between AppClassloader and SystemClassloader](https://stackoverflow.com/questions/34650568/diffrenence-between-appclassloader-and-systemclassloader)
@@ -205,3 +246,5 @@ try {
 [5] [csdn | ClassLoader源码分析 ](http://blog.csdn.net/vking_wang/article/details/17162327)
 
 [6] [Java Platform, Standard Edition Tools Reference](http://docs.oracle.com/javase/8/docs/technotes/tools/windows/toc.html)
+
+[7]周志明.深入理解Java虚拟机:JVM高级特性与最佳实践,第2版.中国:机械工业出版社,2013
