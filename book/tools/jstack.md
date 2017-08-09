@@ -114,7 +114,7 @@ btw，不建议使用`public Thread(ThreadGroup group, String name)`等方法，
 | TIMED_WAITING | The thread is waiting for another thread to perform an action for up to a specified waiting time. |
 | TERMINATED | The thread has exited. |
 
-注：[这里](../language/monitor.html)会解释什么是*monitor*、进入区（下文出现的）和等待区。
+注：[这里](../language/monitor.html)会解释什么是**monitor**、进入区（下文出现的）和等待区。
 
 另外，请参考[《深入理解Java虚拟机》[9]](#references)12.4.3小节状态转换，里面有对于上述线程状态以及相关[线程动作](#线程动作)的解读。
 
@@ -141,7 +141,7 @@ btw，不建议使用`public Thread(ThreadGroup group, String name)`等方法，
 
 首先，是使用`jstack`（linux下可使用`kill`）命令生成thread dump。
 
-然后，一般很难单纯从Thread Dump直接看出问题。我们需要从源代码、Thread Dump和系统*相互的互为的进行分析、推导*。
+然后，一般很难单纯从Thread Dump直接看出问题。我们需要从源代码、Thread Dump和系统**相互的互为的进行分析、推导**。
 
 再者，一个个地排除，缩小问题，看究竟是发生在操作系统还是JVM还是第三方的中间件、库还是自己写的代码是否锁住了同一个地址等等。
 
@@ -177,6 +177,11 @@ btw，不建议使用`public Thread(ThreadGroup group, String name)`等方法，
 
 * 在application中或app外，增加一些监控措施，比如app内监控线程状态(如获取Thread.getAllStackTraces())并发送预警，写一些shell scripts去监控thread、定期抓取thread转储信息，或者使用一些第三方工具等等。
 
+
+## 其他
+
+-XX:+PrintConcurrentLocks
+-XX:+PrintClassHistogram
 
 
 ## references
