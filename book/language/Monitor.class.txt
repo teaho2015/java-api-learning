@@ -1,0 +1,31 @@
+>javap -c Monitor.class
+Compiled from "Monitor.java"
+public class com.tea.lang.monitor.Monitor {
+  public com.tea.lang.monitor.Monitor();
+    Code:
+       0: aload_0
+       1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static void main(java.lang.String[]);
+    Code:
+       0: ldc           #2                  // class com/tea/lang/monitor/Monitor
+       2: dup
+       3: astore_1
+       4: monitorenter
+       5: ldc           #3                  // String a
+       7: astore_2
+       8: aload_1
+       9: monitorexit
+      10: goto          18
+      13: astore_3
+      14: aload_1
+      15: monitorexit
+      16: aload_3
+      17: athrow
+      18: return
+    Exception table:
+       from    to  target type
+           5    10    13   any
+          13    16    13   any
+}
