@@ -180,8 +180,15 @@ btw，不建议使用`public Thread(ThreadGroup group, String name)`等方法，
 
 ## 其他
 
--XX:+PrintConcurrentLocks
--XX:+PrintClassHistogram
+jstack有一个相关的java参数:`-XX:+PrintConcurrentLocks`，官方文档是这样描述的：
+
+> Enables printing of java.util.concurrent locks after a Control+Break event. By default, this option is disabled.
+>
+> Setting this option is equivalent to running the jstack -l command or the jcmd pid Thread.print -l command, where pid is the current Java process identifier.
+
+该设置默认是关闭的，当设置这一参数,比如这样`java -XX:+PrintConcurrentLocks com.xxx.tools.jstack.FooMain`，那么在`Control+Break`后，将打印`java.util.concurrent`相关的锁信息。
+
+该参数等同于`jstack -l`和`jcmd pid Thread.print -l`。
 
 
 ## references
