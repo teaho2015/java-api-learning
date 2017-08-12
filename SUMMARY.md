@@ -12,7 +12,7 @@
 
 * [Java相关]()
     * [monitor](book/language/monitor.md)
-
+    * [JVM的内存结构](book/language/jvm-memory-structure.md)
 
 * java.lang
     * [String](book/java.lang/String.md)
@@ -23,3 +23,5 @@
     * [Instrumentation](book/java.lang.instrument/Instrumentation.md)
 
 
+* [异常]()
+    * [java.lang.StackOverflow](book/exception/StackOverflowError.md)
