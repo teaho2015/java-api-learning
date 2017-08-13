@@ -21,6 +21,8 @@ StackOverflowError是一个VirtualMachineError，Error类及其子孙描述了Ja
 -Xss1048576k
 -Xss1073741824
 
+设置该参数（栈大小）的时候，要明白一点，一般内存资源是一定的有限的，当我们增大该参数的同时也意味着最大线程数的减少。
+
 
 ## debug
 
