@@ -65,6 +65,28 @@ Exception in thread "main" java.lang.StackOverflowError
 有时，可能我们的代码正调用系统或VM的功能，而系统反过来调用我们的代码，产生间接递归。如，链接中举的关于页面渲染的例子。
 
 
+## JVM Crash的stack overflow
+
+一个延伸的问题。
+
+以下摘自[Java trouble shooting guide | 5.1.5 Crash Due to Stack Overflow](http://docs.oracle.com/javase/8/docs/technotes/guides/troubleshoot/crashes001.html#CIHDGFJA)
+
+>A stack overflow in Java language code will normally result in the offending thread throwing the java.lang.StackOverflowError exception. On the other hand, C and C++ write past the end of the stack and provoke a stack overflow. This is a fatal error which causes the process to terminate.
+>
+>In the HotSpot implementation, Java methods share stack frames with C/C++ native code, namely user native code and the virtual machine itself.
+
+意思是，Java使用的JVM实现Hotspot VM中，Java的代码和本地C或C++代码公用相同的栈帧（stack frame）。Java代码的错误会引起Java
+一般Java代码的 stack overflow会抛出java.lang.StackOverflowError，而本地C或C++代码stack overflow的话会引起Crash。
+
+而如何debug这类stacck overflow呢？有如下官方文档参考：
+
+JVM crash会生成Fatal Error Log文件，位置在哪可参考链接。[Troubleshooting Guide | Location of Fatal Error Log](http://docs.oracle.com/javase/8/docs/technotes/guides/troubleshoot/felog001.html#BABIDHJC)
+
+错误Log的头部信息[Troubleshooting Guide | Header Format](http://docs.oracle.com/javase/8/docs/technotes/guides/troubleshoot/felog003.html#BABFFJBB)
+
+[Troubleshooting Guide | 5.1.5 Crash Due to Stack Overflow](http://docs.oracle.com/javase/8/docs/technotes/guides/troubleshoot/crashes001.html#CIHDGFJA)
+
+
 
 ## references
 
