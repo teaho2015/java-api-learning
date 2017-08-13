@@ -88,6 +88,9 @@ JVM crash会生成Fatal Error Log文件，位置在哪可参考链接。[Trouble
 
 这篇文章提供了一些全面的深入底层的分析和解决方案。[简书 | 作者：你假笨 | JVM源码分析之栈溢出完全解读](http://www.jianshu.com/p/debef4f69a90)
 
+Stack Overflow上的一个回答，介绍了`-XX:StackYellowPages=size`、`-XX:StackRedPages=size`、`-XX:StackRedPages=size`和一些相关知识，供需设置这三个参数的参考。[Stack Overflow | What is thread stack size option(-Xss) given to jvm? Why does it have a limit of atleast 68k in a windows pc?](https://stackoverflow.com/a/25318740/6874711)
+
+
 ## references
 
 [1][stackoverflow | What is a StackOverflowError?][link: 1]
