@@ -86,7 +86,7 @@ JVM crash会生成Fatal Error Log文件，位置在哪可参考链接。[Trouble
 
 [Troubleshooting Guide | 5.1.5 Crash Due to Stack Overflow](http://docs.oracle.com/javase/8/docs/technotes/guides/troubleshoot/crashes001.html#CIHDGFJA)
 
-
+这篇文章提供了一些全面的深入底层的分析和解决方案。[简书 | 作者：你假笨 | JVM源码分析之栈溢出完全解读](http://www.jianshu.com/p/debef4f69a90)
 
 ## references
 
