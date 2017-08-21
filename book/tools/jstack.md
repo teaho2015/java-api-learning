@@ -147,7 +147,7 @@ btw，不建议使用`public Thread(ThreadGroup group, String name)`等方法，
 
 如果是用户代码，在对照thread dump的同时，理清代码结构思路，自己画一下像以前《操作系统》学的，简单的线程竞争资源的图也是好的。
 在有GUI的系统里的话，使用TDA等工具，还会有一些debug建议给你。
-当然，还有最权威的[Java Platform, Standard Edition Tools Reference](http://docs.oracle.com/javase/8/docs/technotes/guides/troubleshoot/toc.html)里面，罗列了一大堆问题的分析或解决方式。
+当然，还有最权威的[Java Platform, Standard Edition trouble shooting guide](http://docs.oracle.com/javase/8/docs/technotes/guides/troubleshoot/toc.html)里面，罗列了一大堆问题的分析或解决方式。
 
 如下附带一些网上找资料时找到的案例，可参阅一番，找找手感：
 [javacodegeeks | JVM: How to analyze Thread Dump](https://www.javacodegeeks.com/2012/03/jvm-how-to-analyze-thread-dump.html)
