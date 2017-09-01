@@ -26,7 +26,9 @@ StackOverflowError是一个VirtualMachineError，Error类及其子孙描述了Ja
 
 ## debug
 
-一般发生java.lang.StackOverflowError是出现了错误的递归调用。我认为，结合代码，一般都比较容易发现。
+一般发生java.lang.StackOverflowError是出现了错误的递归调用。
+又或者，相对较小出现的错误是，调用层次过于冗杂。
+以上我认为，结合代码，一般都比较容易发现。
 
 说两个有点隐蔽的例子：
 
