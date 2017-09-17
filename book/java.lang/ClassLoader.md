@@ -174,7 +174,7 @@ private final ConcurrentHashMap parallelLockMap;
 ~~~
 这个lockMap是在ClassLoader初始化时创建的（可看ClassLoader的构造方法）。
 
-首先，在ClassLoader类中有一个静态内部类ParallelLoaders，
+>首先，在ClassLoader类中有一个静态内部类ParallelLoaders，
 他会指定的类的并行能力，如果当前的加载器被定位为具有并行能力，
 那么他就给parallelLockMap定义，就是new一个 ConcurrentHashMap()，
 那么这个时候，我们知道如果当前的加载器是具有并行能力的，那么parallelLockMap就不是Null，
