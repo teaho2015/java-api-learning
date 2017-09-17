@@ -257,6 +257,28 @@ class NewTest2{
 `String`就是使用字符数组(char[] value)实现的。构造器都是围绕`private final char value[];`去实现的。
 含有`byte[]`作为构造器参数的构造器，如果其参数中没指定charset，那么调用系统默认的编码格式。
 
+### 一个遗留问题
+
+~~~
+// Package private constructor which shares value array for speed.
+String(int offset, int count, char value[]) {
+     this.value = value;
+     this.offset = offset;
+     this.count = count;
+}
+//……省略
+private final int offset;
+//……省略
+private final int count;
+~~~
+
+以上，offset属性、count属性、String(int offset, int count, char value[])构造方法
+仅存在于Java7或以下版本，Java8后被移除了。
+
+该friendly的构造方法提供了共享value数组和减少一些验证的一条提高效率的“捷径”。该构造方法在Java中的[Usage](http://grepcode.com/search/usages?type=method&id=repository.grepcode.com%24java%24root@jdk%24openjdk@7-b147@java%24lang@String@%3Cinit%3E%28int%2Cint%2Cchar%5B%5D%29&k=u)。
+可能存在的问题是：假设有一篇50000字符的文章读取进程序以String a的形式存在，但是我可能只需要`b = a.subString(0, 10);`，
+那么subString方法后，a和b字符串会共享了50000个char数组，而当a失去用处被回收，但是b仍在存在时就会造成一个恐怖的局面，这50000-10即49990个char对于程序是无用的隐形的，但却由于value[]数组共享的关系存在于内存中。
+
 ### 方法hashCode()
 
 注：该段在开搞Object类时将迁移到其[hashCode()]()方法上。
