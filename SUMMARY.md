@@ -8,7 +8,8 @@
 
 * [Java相关]()
     * [monitor](book/language/monitor.md)
-    * [JVM的运行时内存结构](book/language/jvm-memory-structure.md)
+    * [JVM的运行时数据区域](book/language/jvm-memory-structure.md)
+    * [垃圾回收](book/language/gc.md)
 
 * java.lang
     * [String](book/java.lang/String.md)
