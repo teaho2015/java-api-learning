@@ -263,7 +263,7 @@ class NewTest2{
 
 #### hashCode的目的和实现原理
 
-在说到String的hashcode的具体实现前，先谈谈hashCode的目的和实现原理。
+在说到String的hashcode的具体实现前，先谈谈hashCode的目的和实现。
 
 ##### hashCode方法约定
 
