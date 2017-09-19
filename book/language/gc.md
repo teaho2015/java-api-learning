@@ -184,7 +184,7 @@ HotSpot VM仅在特定的位置记录信息生成OopMap，这些位置成为安�
 
     g1不是一个分代结构的收集器，同时，它是适合服务器使用的收集器。g1收集器是将堆视为一个个等大的区域，然后根据自身算法，对一些优先级高的区域进行收集。
 
-以上的收集器有不少参数还有关于如何阅读gc日志，请参考书本。
+以上的收集器有不少参数还有关于如何阅读gc日志，请参考书本。回收日志还可以使用一些工具帮助分析，[GCViewer](https://github.com/chewiebug/GCViewer)、[gchisto](https://github.com/jewes/gchisto)。
 
 PS.最后一点供参考，我的机器是Java8 多核，默认使用parallel scavenge+parallel old。
 我之前在oracle的一篇blog上看到（忘记具体出处了），g1将会是Java9 默认收集器。
