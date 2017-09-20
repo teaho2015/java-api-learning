@@ -222,9 +222,11 @@ PS.最后一点供参考，我的机器是Java8 多核，默认使用parallel sc
 
 [1]周志明.深入理解Java虚拟机:JVM高级特性与最佳实践,第2版.中国:机械工业出版社,2013
 
-[2] [ImportNew | Minor GC、Major GC和Full GC之间的区别][link: 2]
+[2][ImportNew | Minor GC、Major GC和Full GC之间的区别][link: 2]
 
+[3][Java Reference Objects or How I Learned to Stop Worrying and Love OutOfMemoryError](http://www.kdgregory.com/index.php?page=java.refobj#ObjectLifeCycle)
 
+[4][JVM 垃圾回收器工作原理及使用实例介绍](https://www.ibm.com/developerworks/cn/java/j-lo-JVMGarbageCollection/)
 
 [link: 2]: http://www.importnew.com/15820.html
 
