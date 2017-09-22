@@ -2,6 +2,8 @@
 
 **注**：本篇笔记主要是学习[深入理解Java虚拟机<sup>[1]</sup>](#references)第三章的简单总结。GC不是本gitbook的关注点，故本篇仅简单描述以帮助其他地方说明，不作一些延伸探究。
 
+在安利一篇好东西：官方的GC调优指南。[Java Platform, Standard Edition HotSpot Virtual Machine Garbage Collection Tuning Guide](http://docs.oracle.com/javase/8/docs/technotes/guides/vm/gctuning/)
+
 ## 定义
 
 垃圾回收(Garbage Collection, 下统称GC)是Java语言的一个特点。GC让java避免了想C/C++那样需要手动释放内存。
