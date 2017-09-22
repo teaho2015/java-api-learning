@@ -59,7 +59,7 @@ jvisualVM, JProfiler, MAT, IBM HeapAnalyzer等等。
 
 分析的话，当然是结合heap dump、环境和gc log分析。
 
-首先对照下面的[错误集](#错误集)帮助定位，有一些OutOfMemoryError是比较容易发现的，比如，方法区引起的爆内存。
+首先对照下面的[错误集](#错误集)帮助定位（当然有一些情况OutOfMemoryError是没调用栈信息，没错误信息，只有个`java.lang.OutOfMemoryError`躺在那里的。。），有一些OutOfMemoryError是比较容易发现的，比如，方法区引起的爆内存。
 再结合工具，在我使用过的工具中jhat是最简易直接的，而jvisualVM、JProfiler、MAT中，我个人偏好MAT，因为MAT会有额外的错误分析建议。
 IBM HeapAnalyzer我暂时没使用过。
 
@@ -68,7 +68,7 @@ IBM HeapAnalyzer我暂时没使用过。
 
 事实上，引发OutOfMemoryError的问题千奇百怪，其中一些绝非能轻易追踪到，
 遗憾的是，以我的经验仅能总结如上，分析OutOfMemoryError并不能仅从一时的学习能完善，
-私以为，这事儿需长久地从复杂的生产环境和自我学习总结中慢慢精进。
+私以为，这事儿需长久地从复杂的生产环境和自我深入学习总结中慢慢精进。
 
 以下是从网上发现的比较好的由“老炮儿”所写的分析OutOfMemoryError的文章。
 
@@ -82,8 +82,12 @@ IBM HeapAnalyzer等工具的架构师和开发者所写。[Unveiling the java.la
 
 [Java Troubleshooting Guide | 2.7 Native Memory Tracking](http://docs.oracle.com/javase/8/docs/technotes/guides/troubleshoot/tooldescr007.html)
 
+[你假笨 | JVM源码分析之临门一脚的OutOfMemoryError完全解读](http://lovestblog.cn/blog/2016/08/29/oom/)
+
 
 ## 错误集
+
+常见错误集。
 
 ### Requested array size exceeds VM limit
 
@@ -138,7 +142,7 @@ Metaspace究竟是啥么，与PermGen又有什么关系，Java6、7、8这3个�
 
 ### java.lang.OutOfMemoryError: requested NNN bytes for MMMM. Out of swap space?
 
-我未曾遇到过此错误，只是网上看到，试着用写个实例重现出来，未果。望看此笔记的朋友帮忙解答。
+**未解问题**。我未曾遇到过此错误，只是网上看到，试着用写个实例重现出来，未果。望看此笔记的朋友帮忙解答。
 
 以下是一些网上解释：
 
