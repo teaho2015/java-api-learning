@@ -147,9 +147,6 @@ This exception is typically thrown because the amount of live data barely fits i
 代码示例：
 [include:5-](../../javacode/src/main/java/com/tea/outofmemory/GCOverheadLimitExceededMain.java)
 
-
-
-
 ## references
 
 [1][Plumbr | java.lang.OutOfMemoryError - The 8 symptoms that surface them][link: 1]
