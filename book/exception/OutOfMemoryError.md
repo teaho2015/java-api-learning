@@ -113,6 +113,8 @@ Metaspace究竟是啥么，与PermGen又有什么关系，Java6、7、8这3个�
 
 [javacodegeeks | Java 8: From PermGen to Metaspace](https://www.javacodegeeks.com/2013/02/java-8-from-permgen-to-metaspace.html)
 
+对metaspace更深入的解读[你假笨 | JVM源码分析之Metaspace解密](http://lovestblog.cn/blog/2016/10/29/metaspace/)
+
 ### java.lang.OutOfMemoryError: Java Heap Space
 
 示例就不写了，爆Heap的代码很容易写出来，限制堆大小，然后随便创建个比较大的数组或者往一个StringBuffer无限循环塞东西等等，都可以轻松引爆Heap。
@@ -166,8 +168,8 @@ This exception is typically thrown because the amount of live data barely fits i
 
 [4][JINWOO HWANG | Unveiling the java.lang.Out OfMemoryError][link: 4]
 
+[5]Bruce Eckel.java编程思想,第4版.中国:机械工业出版社,2007
 
-[]Bruce Eckel.java编程思想,第4版.中国:机械工业出版社,2007
 
 
 [link: 1]: https://plumbr.eu/outofmemoryerror
