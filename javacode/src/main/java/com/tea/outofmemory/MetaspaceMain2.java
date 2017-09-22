@@ -8,6 +8,10 @@ package com.tea.outofmemory;
  *
  * test java.lang.OutOfMemoryError: Metaspace
  *
+ * *  VM options: -XX:MaxMetaspaceSize=10M
+ *              -verbose:gc
+ *              -XX:+PrintGCDetails
+ *              -XX:+PrintGCTimeStamps
  */
 public class MetaspaceMain2 {
     static javassist.ClassPool cp = javassist.ClassPool.getDefault();
