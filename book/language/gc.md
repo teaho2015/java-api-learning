@@ -2,7 +2,11 @@
 
 **注**：本篇笔记主要是学习[深入理解Java虚拟机<sup>[1]</sup>](#references)第三章的简单总结。GC不是本gitbook的关注点，故本篇仅简单描述以帮助其他地方说明，不作一些延伸探究。
 
-在安利一篇好东西：官方的GC调优指南。[Java Platform, Standard Edition HotSpot Virtual Machine Garbage Collection Tuning Guide](http://docs.oracle.com/javase/8/docs/technotes/guides/vm/gctuning/)
+在此安利两篇好东西：
+
+* 官方的GC调优指南。[Java Platform, Standard Edition HotSpot Virtual Machine Garbage Collection Tuning Guide](http://docs.oracle.com/javase/8/docs/technotes/guides/vm/gctuning/)
+
+* [oracle | memorymanagement-whitepaper](http://www.oracle.com/technetwork/java/javase/memorymanagement-whitepaper-150215.pdf)
 
 ## 定义
 
