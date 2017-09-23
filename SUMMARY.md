@@ -8,6 +8,7 @@
     * [jstack](book/tools/jstack.md)
     * [jmap](book/tools/jmap.md)
     * [jhat](book/tools/jhat.md)
+    * [jstat](book/tools/jstat.md)
 
 * [Java相关]()
     * [monitor](book/language/monitor.md)
