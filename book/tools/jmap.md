@@ -144,9 +144,3 @@ concurrent mark-sweep generation: //老年代
 
 
 
-
-[link: 5]: https://stackoverflow.com/a/25088276/6874711
-
-[oracle | memorymanagement-whitepaper]: http://www.oracle.com/technetwork/java/javase/memorymanagement-whitepaper-150215.pdf
-
-
