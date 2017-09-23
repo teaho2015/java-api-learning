@@ -7,6 +7,7 @@
     * [jps](book/tools/jps.md)
     * [jstack](book/tools/jstack.md)
     * [jmap](book/tools/jmap.md)
+    * [jhat](book/tools/jhat.md)
 
 * [Java相关]()
     * [monitor](book/language/monitor.md)
@@ -20,7 +21,7 @@
 * java.lang.instrument
     * [Instrumentation](book/java.lang.instrument/Instrumentation.md)
 
-* [异常]()
+* [异常](book/exception/exception.md)
     * [java.lang.StackOverflowError](book/exception/StackOverflowError.md)
     * [java.lang.OutOfMemoryError](book/exception/OutOfMemoryError.md)
 
