@@ -65,8 +65,8 @@ using thread-local object allocation.
 Concurrent Mark-Sweep GC    //说明老年代使用CMS垃圾收集器
 
 Heap Configuration: //配置信息
-   MinHeapFreeRatio         = 40                    //-XX:MinHeapFreeRatio， minimum allowed percentage of free heap space (0 to 100) after a GC event.
-   MaxHeapFreeRatio         = 70                    //-XX:MaxHeapFreeRatio， the maximum allowed percentage of free heap space (0 to 100) after a GC event.
+   MinHeapFreeRatio         = 40                    //-XX:MinHeapFreeRatio， minimum allowed percentage of free heap space (0 to 100) after a GC event. 默认值是40
+   MaxHeapFreeRatio         = 70                    //-XX:MaxHeapFreeRatio， the maximum allowed percentage of free heap space (0 to 100) after a GC event. 默认值是70
    MaxHeapSize              = 786432000 (750.0MB)   //-XX:MaxHeapSize=size, 最大heap size
    NewSize                  = 44695552 (42.625MB)   //-XX:NewSize=szie, 新生代大小
    MaxNewSize               = 262144000 (250.0MB)   //-XX:MaxNewSize=size，最大的新生代大小
@@ -78,7 +78,7 @@ Heap Configuration: //配置信息
    MaxMetaspaceSize         = 17592186044415 MB     //-XX:MaxMetaspaceSize=size,the maximum amount of native memory that can be allocated for class metadata.默认是不限制大小的
    G1HeapRegionSize         = 0 (0.0MB)             //-XX:G1HeapRegionSize=size，如果使用g1垃圾收集器，那么这里显示的是设定的region大小，默认region是1m到32m。
 
-Heap Usage:
+Heap Usage: //Heap使用
 New Generation (Eden + 1 Survivor Space):
    capacity = 83427328 (79.5625MB)
    used     = 39811536 (37.96723937988281MB)
@@ -99,20 +99,39 @@ To Space:
    used     = 0 (0.0MB)
    free     = 9240576 (8.8125MB)
    0.0% used
-concurrent mark-sweep generation:
+concurrent mark-sweep generation: //老年代
    capacity = 185057280 (176.484375MB)
    used     = 109427528 (104.35822296142578MB)
    free     = 75629752 (72.12615203857422MB)
    59.13170668022355% used
 ~~~
 
-`-histo[:live]`
+* `-histo[:live]`
 
--XX:+PrintClassHistogram
+>Prints a histogram of the heap.For each Java class, the number of objects, memory size in bytes, and the fully qualified class names are printed.
 
+打印一个条形图(histogram)，里面包含对应每个Java类的对象数、内存占用大小(byte)、类全称的数据。(不懂为何叫histogram，在我看来只是个破表格。。)。
+当加上`:live`时，只打印存活对象。
 
+* `-clstats`
 
+输出各Classloader的数据统计。
 
+* `-finalizerinfo`
+
+打印等待终结的对象信息。
+
+* `-dump:[live,]format=b,file=<filename>`
+
+生成hprof格式的java heap dump文件。可使用`jhat`或一些profiler工具分析。
+
+* `-F`
+
+强制输出选项。当使用jmap -dump或jmap -histo选项没响应时可在原命令中添加`-F`再运行。注：此option不支持live子选项。
+
+* `-J<flag>`
+
+指定传递给运行jmap的java进程的JVM参数。
 
 
 ## references
