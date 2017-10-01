@@ -6,7 +6,8 @@
                 "anchors",
                 "disqus",
                 "ga",
-                "plantuml"
+                "plantuml",
+                "advanced-emoji"
                ],
     "pluginsConfig": {
         "include-codeblock": {
