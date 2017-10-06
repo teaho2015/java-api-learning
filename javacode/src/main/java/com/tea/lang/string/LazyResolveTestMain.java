@@ -19,17 +19,6 @@ public class LazyResolveTestMain {
     }
 }
 //output
-/* //java6 output
-
-"hello" existed in the pool before
-is the same as "hello": true
-is the same as "main": false
-
-"main" existed in the pool before
-is the same as "hello": false
-is the same as "main": true
- */
-
 /* //java7 and above output
 "hello" did not exist in the pool before
 is the same as "hello": true

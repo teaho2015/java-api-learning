@@ -181,7 +181,7 @@ oop constantPoolOopDesc::string_at_impl(constantPoolHandle this_oop, int which, 
 
 于是，我在stackoverflow上提了个问题，得出答案：[ [10]stackoverflow | the timing of String Literal loaded into StringTable in Java HotSpot vm][link: stackoverflow | the timing of String Literal loaded into StringTable in Java HotSpot vm]
 
-由如下代码块可知，HotSpot VM是Lazy resolve，且String Literal（字符串字面量）是Lazy resolve（注，我的讨论base在Java8，java6如下亲测并不是lazy resolve）。
+由如下代码块可知，HotSpot VM是Lazy resolve，且String Literal（字符串字面量）是Lazy resolve（注，我的讨论base在Java8）。
 [include:7-](../../javacode/src/main/java/com/tea/lang/string/LazyResolveTestMain.java)
 
 PS.同时发现了一个网页运行代码的好工具[ideone](http://ideone.com/FrIAOX)。
@@ -190,6 +190,11 @@ PS.同时发现了一个网页运行代码的好工具[ideone](http://ideone.com
 
 [`intern()`](#方法intern)方法，可使实例化后的调用该方法的字符串，与StringTable进行比对，
 不存在则将该字符串引用塞进StringTable，并返回其引用。
+
+（注：Java6及以下版本并不是将引用塞进StringTable。具体看如下代码和文章[美团点评技术团队 | 深入解析String#intern](https://tech.meituan.com/in_depth_understanding_string_intern.html)）
+[include:7-](../../javacode/src/main/java/com/tea/lang/string/StringInternTestMain.java)
+
+
 
 #### 如何限定StringTable的大小
 
