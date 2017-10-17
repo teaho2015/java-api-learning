@@ -19,12 +19,19 @@
     * [String](book/java.lang/String.md)
     * [ClassLoader](book/java.lang/ClassLoader.md)
 
+* [java.util]()
+    * [HashMap](book/java.util/HashMap.md)
+
 * java.lang.instrument
     * [Instrumentation](book/java.lang.instrument/Instrumentation.md)
 
 * [异常](book/exception/exception.md)
     * [java.lang.StackOverflowError](book/exception/StackOverflowError.md)
     * [java.lang.OutOfMemoryError](book/exception/OutOfMemoryError.md)
+
+* [相关算法](book/algorithm/README.md)
+    * [红黑二叉查找树](book/algorithm/red-black tree.md)
+
 
 [](reserved for * Java指令)
 [](reserved for * 关键字)
