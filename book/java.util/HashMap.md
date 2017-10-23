@@ -57,7 +57,6 @@ Hashtable初始化桶大小为11，就是桶大小设计为素数的应用（Has
 #### put
 
 ~~~
-
     /**
      * Associates the specified value with the specified key in this map.
      * If the map previously contained a mapping for the key, the old
@@ -78,7 +77,6 @@ Hashtable初始化桶大小为11，就是桶大小设计为素数的应用（Has
 首先看下，hash方法：
 
 ~~~
-
     /**
      * Computes key.hashCode() and spreads (XORs) higher bits of hash
      * to lower.  Because the table uses power-of-two masking, sets of
@@ -110,7 +108,6 @@ key的哈希值的高位更充分参与到定位bucket的过程。(注意下文�
 拓展阅读：[美团点评技术团队 | Java 8系列之重新认识HashMap][link:4]的"确定哈希桶数组索引位置"一小节。
 
 ~~~
-
     /**
      * Implements Map.put and related methods
      *
@@ -163,7 +160,6 @@ key的哈希值的高位更充分参与到定位bucket的过程。(注意下文�
         afterNodeInsertion(evict);
         return null;
     }
-
 ~~~
 
 感觉没什么可说，源码本身也有注释。
@@ -173,7 +169,6 @@ key的哈希值的高位更充分参与到定位bucket的过程。(注意下文�
 扩容方法。挺赞的代码。
 
 ~~~
-
    /**
      * Initializes or doubles table size.  If null, allocates in
      * accord with initial capacity target held in field threshold.
