@@ -44,12 +44,38 @@ final float loadFactor; //加载因子，默认0.75，一般不要改
 
 ~~~
 
-关于table这数组的length为什么必须为2的倍数(JavaDoc中有`capacity MUST be a power of two.`)？
+关于table这数组的length为什么必须为2的n次方(JavaDoc中有`capacity MUST be a power of two.`)？
 摘自[美团点评技术团队 | Java 8系列之重新认识HashMap][link:4]:
 >在HashMap中，哈希桶数组table的长度length大小必须为2的n次方(一定是合数)，这是一种非常规的设计，
 常规的设计是把桶的大小设计为素数。相对来说素数导致冲突的概率要小于合数，具体证明可以参考http://blog.csdn.net/liuqiyao_01/article/details/14475159，
 Hashtable初始化桶大小为11，就是桶大小设计为素数的应用（Hashtable扩容后不能保证还是素数）。HashMap采用这种非常规设计，主要是为了在取模和扩容时做优化，
 同时为了减少冲突，HashMap定位哈希桶索引位置时，也加入了高位参与运算的过程。
+
+
+当自定义设置初始容量和负载因子时，有个有趣的方法`tableSizeFor(int cap)`:
+~~~
+    public HashMap(int initialCapacity, float loadFactor) {
+        ……(省略)
+        this.loadFactor = loadFactor;
+        this.threshold = tableSizeFor(initialCapacity);
+    }
+
+    /**
+     * Returns a power of two size for the given target capacity.
+     */
+    static final int tableSizeFor(int cap) {
+        int n = cap - 1;
+        n |= n >>> 1;
+        n |= n >>> 2;
+        n |= n >>> 4;
+        n |= n >>> 8;
+        n |= n >>> 16;
+        return (n < 0) ? 1 : (n >= MAXIMUM_CAPACITY) ? MAXIMUM_CAPACITY : n + 1;
+    }
+~~~
+可自行模拟一下方法是如何执行的。
+主要功能是返回一个比给定整数大且最接近的2的n次方整数，如给定12，返回2的4次方16。
+
 
 
 ### 方法
