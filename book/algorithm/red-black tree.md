@@ -79,4 +79,6 @@
 
 [3] [知乎 | 余佳晋的回答 | 为啥 redis 使用跳表(skiplist)而不是使用 red-black？][link:3]
 
+[4] [Red–black tree](https://en.wikipedia.org/wiki/Red%E2%80%93black_tree)
+
 [link:3]: https://www.zhihu.com/question/20202931/answer/30983057
