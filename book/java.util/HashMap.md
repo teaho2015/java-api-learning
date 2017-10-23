@@ -34,7 +34,7 @@
 
 transient Node<K,V>[] table; //存储Node bucket的数组
 
-transient int size; //存储的key-value对的总量
+transient int size; //当前存储的key-value对的总数
 
 int modCount;  //记录集合结构变化的次数，用于快速失败等等
 
@@ -44,12 +44,14 @@ final float loadFactor; //加载因子，默认0.75，一般不要改
 
 ~~~
 
+
 关于table这数组的length为什么必须为2的n次方(JavaDoc中有`capacity MUST be a power of two.`)？
 摘自[美团点评技术团队 | Java 8系列之重新认识HashMap][link:4]:
 >在HashMap中，哈希桶数组table的长度length大小必须为2的n次方(一定是合数)，这是一种非常规的设计，
 常规的设计是把桶的大小设计为素数。相对来说素数导致冲突的概率要小于合数，具体证明可以参考http://blog.csdn.net/liuqiyao_01/article/details/14475159，
 Hashtable初始化桶大小为11，就是桶大小设计为素数的应用（Hashtable扩容后不能保证还是素数）。HashMap采用这种非常规设计，主要是为了在取模和扩容时做优化，
 同时为了减少冲突，HashMap定位哈希桶索引位置时，也加入了高位参与运算的过程。
+
 
 
 当自定义设置初始容量和负载因子时，有个有趣的方法`tableSizeFor(int cap)`:
