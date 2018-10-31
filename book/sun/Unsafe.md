@@ -29,6 +29,11 @@ allocate、free，学过c的应该懂的。
 可知的，在Jdk的基础库中，很多类使用Unsafe，如：AQS，AtomicInteger。其中很多是用Unsafe去做CAS(compare and swap)。
 CAS是指：比较旧值是否是期望值，如果是则替换为新值的一个原子操作。CAS机制保证了对值的修改是线程安全的。
 
+#### CAS的缺点
+
+CAS无法避免ABA问题。举例来说，某属性存了值A，当前操作先获取了A值，别的线程将值从原值A更新到B再更新为A后，经过一阵处理后，
+再使用CAS去更新属性值，是会返回成功的。
+
 
 
 
