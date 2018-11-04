@@ -23,7 +23,7 @@
 * tryReleaseShared
 * isHeldExclusively
 
-这些方法的实现必须是线程安全的，且应是短的非阻塞的。实现这些方法是使用该类的真正目的。
+这些方法的内部实现必须是线程安全的，且应是短的非阻塞的。实现这些方法是使用该类的唯一的真正方式。
 
 AQS的继承结构：
 ![AQS类继承结构](AQS.jpg)
@@ -38,10 +38,20 @@ AQS的继承结构：
 
 
 
+
+
+
+
+
+
+
+
+
+
 ## references
 
 
-
+[1] [Washington University | Spin Locks and Contention](https://www.cse.wustl.edu/~angelee/archive/cse539/spr15/lectures/locks.pdf)
 
 
 
