@@ -35,15 +35,53 @@ AQS的继承结构：
 
 作者是Doug Lea老爷子 :-)
 
+### Node
+
 AQS的核心是静态内部final类Node。归纳介绍几点：
-1. 此Node类是等待队列的节点类。而该等待队列的实现是"CLH"锁队列的变种。CLH锁一般用于自旋锁。我们是用该结构去维护一些
+1. 此Node类是等待队列的节点类。而该等待队列的实现是"CLH"锁队列的变种。CLH锁一般用于自旋锁。但我们是用该结构去维护一些
 关于持有线程的队列节点关系的控制信息，而不是用它作为阻塞同步器。
 2. 位于队列首部的可能会尝试acquire,但不能保证能成功acquire。
-3. 入队列就是通过拼接一个新的尾节点，出队列，则是需设置head属性。
+3. 入队列就是通过拼接一个新的尾节点，出队列，则是需设置HEAD属性。
 
+Node类与AQS的关系：
+![Node](aqs_structure.png)
 
+Node类源码及字段解析：
+~~~
+static final class Node {
+        volatile int waitStatus;
+        volatile Node prev;
+        volatile Node next;
+        volatile Thread thread;
+        Node nextWaiter;
+        
+        final boolean isShared() {
+            return nextWaiter == SHARED;
+        }
 
+        final Node predecessor() throws NullPointerException {
+            Node p = prev;
+            if (p == null)
+                throw new NullPointerException();
+            else
+                return p;
+        }
 
+        Node() {    // Used to establish initial head or SHARED marker
+        }
+
+        Node(Thread thread, Node mode) {     // Used by addWaiter
+            this.nextWaiter = mode;
+            this.thread = thread;
+        }
+
+        Node(Thread thread, int waitStatus) { // Used by Condition
+            this.waitStatus = waitStatus;
+            this.thread = thread;
+        }
+    }
+
+~~~
 
 
 
@@ -57,7 +95,6 @@ AQS的核心是静态内部final类Node。归纳介绍几点：
 
 
 ## references
-
 
 [1] [Washington University | Spin Locks and Contention](https://www.cse.wustl.edu/~angelee/archive/cse539/spr15/lectures/locks.pdf)
 
