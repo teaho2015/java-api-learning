@@ -37,7 +37,7 @@ AQS的继承结构：
 
 ### Node
 
-AQS的核心是静态内部final类Node。归纳介绍几点：
+AQS的核心结构是静态内部final类Node。归纳介绍几点：
 1. 此Node类是等待队列的节点类。而该等待队列的实现是"CLH"锁队列的变种。CLH锁一般用于自旋锁。但我们是用该结构去维护一些
 关于持有线程的队列节点关系的控制信息，而不是用它作为阻塞同步器。
 2. 位于队列首部的可能会尝试acquire,但不能保证能成功acquire。
@@ -49,9 +49,15 @@ Node类与AQS的关系：
 Node类源码及字段解析：
 ~~~
 static final class Node {
-        volatile int waitStatus;
-        volatile Node prev;
-        volatile Node next;
+        static final Node SHARED = new Node(); //标记一个在分享模式等待中节点
+        static final Node EXCLUSIVE = null; //标记一个在排他模式中的节点
+        static final int CANCELLED =  1; //waitStatus的一个值，指明线程已被取消
+        static final int SIGNAL    = -1; //waitStatus的一个值，指明继任者线程需要取消阻塞
+        static final int CONDITION = -2; //waitStatus的一个值，指明现在正处于condition等待中
+        static final int PROPAGATE = -3; //waitStatus的一个值，指明下一个acquireShared是无条件传播的
+        volatile int waitStatus; 
+        volatile Node prev; 
+        volatile Node next; //
         volatile Thread thread;
         Node nextWaiter;
         
