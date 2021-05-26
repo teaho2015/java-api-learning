@@ -1,28 +1,33 @@
 {
+  "plugins": [
+    "include-codeblock",
+    "advanced-emoji",
+    "anchors",
+    "disqus",
+    "ga",
+    "plantuml",
+    "advanced-emoji",
+    "page-treeview"
+  ],
+  "pluginsConfig": {
+    "include-codeblock": {
+      "template": "default",
+      "unindent": true,
+      "theme": "monokai"
+    },
+    "disqus": {
+      "shortName": "java-api-learning-gitbook-teaho-net"
+    },
+    "ga": {
+      "token": "UA-90704189-3"
+    },
+    "page-treeview": {
+      "copyright": "",
+      "minHeaderCount": "4",
+      "minHeaderDeep": "10"
 
-    "plugins": [
-                "include-codeblock",
-                "advanced-emoji",
-                "anchors",
-                "disqus",
-                "ga",
-                "plantuml",
-                "advanced-emoji"
-               ],
-    "pluginsConfig": {
-        "include-codeblock": {
-            "template": "default",
-            "unindent": true,
-            "theme": "monokai"
-        },
-        "disqus": {
-            "shortName": "java-api-learning-gitbook-teaho-net"
-        }, 
-        "ga": {
-            "token": "UA-90704189-3"
-        }
-        
     }
+  }
 }
 
 
