@@ -18,6 +18,7 @@
     * [ClassLoader](book/java.lang/ClassLoader.md)
 * java.util
     * [HashMap](book/java.util/HashMap.md)
+    * [DualPivotQuicksort](book/java.util/DualPivotQuicksort.md)
 * 并发相关
     * [Unsafe](book/sun/Unsafe.md)
     * [AbstractQueuedSynchronizer](book/concurrent/locks/AbstractQueuedSynchronizer.md)
