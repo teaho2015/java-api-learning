@@ -28,4 +28,5 @@
     * [java.lang.OutOfMemoryError](book/exception/OutOfMemoryError.md)
 * [相关算法](book/algorithm/README.md)
     * [红黑二叉查找树](book/algorithm/red-black tree.md)
+    * [快速排序](book/algorithm/quick_sort.md)
 
