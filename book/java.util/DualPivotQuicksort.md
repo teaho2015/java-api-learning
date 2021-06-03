@@ -2,6 +2,8 @@
 
 ## 介绍
 
+自java 1.7后，Arrays.sort排序不再使用quicksort实现，而是使用此类DualPivotQuicksort。
+
 该类是双轴排序算法（Dual-Pivot Quicksort algorithm）的实现。提供出来的方法都是package-private的，设计出来主要就是给Arrays类使用的。  
 作者是Vladimir Yaroslavskiy, Jon Bentley, Josh Bloch三位。
 
