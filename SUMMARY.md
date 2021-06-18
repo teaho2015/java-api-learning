@@ -22,6 +22,7 @@
 * 并发相关
     * [Unsafe](book/sun/Unsafe.md)
     * [AbstractQueuedSynchronizer](book/concurrent/locks/AbstractQueuedSynchronizer.md)
+    * [java.util.concurrent.BlockingQueue接口及其实现类](book/concurrent/blocking_queue/BlockingQueue.md)
 * java.lang.instrument
     * [Instrumentation](book/java.lang.instrument/Instrumentation.md)
 * [异常](book/exception/exception.md)
