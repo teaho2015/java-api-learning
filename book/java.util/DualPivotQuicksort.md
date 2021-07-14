@@ -4,14 +4,16 @@
 
 自java 1.7后，Arrays.sort排序不再使用quicksort实现，而是使用此类DualPivotQuicksort。
 
-该类是双轴排序算法（Dual-Pivot Quicksort algorithm）的实现。提供出来的方法都是package-private的，设计出来主要就是给Arrays类使用的。  
+该类提供出来的方法都是package-private的，设计出来主要就是给Arrays类使用的。  
 作者是Vladimir Yaroslavskiy, Jon Bentley, Josh Bloch三位。
 
 ### 算法介绍
 
-该算法是快排算法的变种，是俄罗斯开发者Vladimir Yaroslavskiy在2009发明的。
 算法分析写在这里：  
-[快速排序](../algorithm/quick_sort.md)的Dual-Pivot Quicksort。
+* [快速排序|teaho.net](../algorithm/quick_sort.md)的Dual-Pivot Quicksort。  
+  核心实现是双轴快速排序算法（Dual-Pivot Quicksort algorithm），该算法是快排算法的变种，是俄罗斯开发者Vladimir Yaroslavskiy在2009发明的。
+* 对于数据量较少的数据集会采用[插入排序|teaho.net](../algorithm/insertion_sort.md)
+
 
 ## 代码参数分析
 

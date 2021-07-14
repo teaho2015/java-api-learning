@@ -32,4 +32,5 @@
     * [红黑二叉查找树](book/algorithm/red-black tree.md)
     * [快速排序](book/algorithm/quick_sort.md)
     * [归并排序](book/algorithm/merge_sort.md)
+    * [插入排序](book/algorithm/insertion_sort.md)
 
